@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Julieth Rubio — Hoja de vida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper: oklch(0.985 0.004 80);
+    --paper-2: oklch(0.965 0.006 75);
+    --ink: oklch(0.20 0.012 60);
+    --ink-2: oklch(0.38 0.012 60);
+    --ink-3: oklch(0.55 0.012 60);
+    --rule: oklch(0.86 0.008 70);
+    --accent: oklch(0.52 0.09 40);
+    --serif: "Instrument Serif", "Times New Roman", serif;
+    --sans: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: "Geist Mono", ui-monospace, monospace;
+  }
+
+  *{ box-sizing: border-box; }
+  html, body{ margin:0; padding:0; }
+  body{
+    background: var(--paper-2);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page{
+    max-width: 880px;
+    margin: 48px auto;
+    background: var(--paper);
+    padding: 80px 88px 96px;
+    box-shadow: 0 1px 0 oklch(0.92 0.006 70), 0 30px 60px -30px oklch(0.4 0.02 60 / 0.18);
+    border-radius: 2px;
+  }
+
+  /* ── Header ───────────────────────────────────────────────────── */
+  header.masthead{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 24px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .name{
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--ink);
+  }
+  .name em{
+    font-style: italic;
+    color: var(--accent);
+  }
+  .role{
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-2);
+    letter-spacing: 0.01em;
+    margin-top: 14px;
+    max-width: 56ch;
+    text-wrap: balance;
+  }
+  .contact{
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-2);
+    text-align: right;
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+  }
+  .contact div{ white-space: nowrap; }
+
+  /* ── Section frame ────────────────────────────────────────────── */
+  section{
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 32px;
+    padding: 36px 0 32px;
+    border-bottom: 1px solid var(--rule);
+  }
+  section:last-of-type{ border-bottom: none; }
+
+  .sec-label{
+    font-family: var(--mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-3);
+    padding-top: 4px;
+  }
+  .sec-label .num{
+    display: block;
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .sec-body > * + *{ margin-top: 14px; }
+  .sec-body p{ margin: 0; max-width: 70ch; text-wrap: pretty; }
+
+  /* Profile paragraphs */
+  .profile p{
+    font-family: var(--serif);
+    font-size: 19px;
+    line-height: 1.45;
+    color: var(--ink);
+    max-width: 60ch;
+    font-weight: 400;
+  }
+  .profile p + p{ margin-top: 18px; }
+
+  /* ── Skills ───────────────────────────────────────────────────── */
+  .skills-group{ }
+  .skills-group + .skills-group{ margin-top: 22px; }
+  .skills-group h3{
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+  .skill-row{
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 20px;
+    padding: 8px 0;
+    border-top: 1px dotted var(--rule);
+  }
+  .skill-row:first-of-type{ border-top: 1px solid var(--rule); }
+  .skill-row dt{
+    font-family: var(--mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+    padding-top: 2px;
+  }
+  .skill-row dd{
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  /* ── Experience ───────────────────────────────────────────────── */
+  .job{ }
+  .job + .job{
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px dotted var(--rule);
+  }
+  .job-head{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 4px;
+  }
+  .job-title{
+    font-family: var(--serif);
+    font-size: 26px;
+    line-height: 1.15;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+  .job-dates{
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .job-org{
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-2);
+    margin: 0 0 14px;
+    font-style: italic;
+  }
+  .job ul{
+    list-style: none;
+    margin: 12px 0 0;
+    padding: 0;
+  }
+  .job ul li{
+    position: relative;
+    padding: 6px 0 6px 22px;
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.55;
+    max-width: 72ch;
+  }
+  .job ul li::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 10px;
+    height: 1px;
+    background: var(--ink-3);
+  }
+  .job ul li + li{ border-top: 1px dotted var(--rule); }
+
+  /* ── Achievements ─────────────────────────────────────────────── */
+  .achievements{
+    counter-reset: achv;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .achievements li{
+    counter-increment: achv;
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 16px;
+    padding: 14px 0;
+    border-top: 1px dotted var(--rule);
+    font-size: 13.5px;
+    line-height: 1.55;
+    max-width: 78ch;
+  }
+  .achievements li:first-child{ border-top: 1px solid var(--rule); }
+  .achievements li::before{
+    content: "0" counter(achv);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    padding-top: 3px;
+  }
+
+  /* ── Education / Certs ────────────────────────────────────────── */
+  .entry{
+    padding: 12px 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: baseline;
+    border-top: 1px dotted var(--rule);
+  }
+  .entry:first-of-type{ border-top: 1px solid var(--rule); }
+  .entry h4{
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.2;
+    margin: 0 0 4px;
+    color: var(--ink);
+  }
+  .entry .meta{
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--ink-2);
+    margin: 0;
+  }
+  .entry .when{
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  /* ── Pills (formación complementaria) ─────────────────────────── */
+  .pills{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .pills li{
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-2);
+    padding: 6px 12px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+  }
+
+  /* ── Languages ────────────────────────────────────────────────── */
+  .langs{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .langs li{
+    border-top: 1px solid var(--rule);
+    padding-top: 10px;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .langs li span{
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Footer note ──────────────────────────────────────────────── */
+  .colophon{
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--ink-3);
+    letter-spacing: 0.04em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  /* Print */
+  @media print{
+    body{ background: white; }
+    .page{
+      box-shadow: none;
+      margin: 0;
+      max-width: none;
+      padding: 36px 48px;
+    }
+    section{ break-inside: avoid; }
+    .job{ break-inside: avoid; }
+  }
+
+  @media (max-width: 760px){
+    .page{ padding: 40px 24px 56px; margin: 16px; }
+    .name{ font-size: 44px; }
+    header.masthead{ grid-template-columns: 1fr; }
+    .contact{ text-align: left; }
+    section{ grid-template-columns: 1fr; gap: 14px; }
+    .skill-row, .entry{ grid-template-columns: 1fr; gap: 4px; }
+    .job-head{ grid-template-columns: 1fr; }
+    .langs{ grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <article class="page" data-screen-label="Hoja de vida">
+
+    <!-- ── Masthead ──────────────────────────────────────────────── -->
+    <header class="masthead">
+      <div>
+        <h1 class="name">Julieth <em>Rubio</em></h1>
+        <p class="role">Ingeniera Industrial &nbsp;|&nbsp; Especialista en Gestión de Riesgos Estratégico y Cultura Organizacional</p>
+      </div>
+      <div class="contact">
+        <div>Bogotá, Colombia</div>
+        <div>+57 320 810 3735</div>
+        <div>juliethrubio68@gmail.com</div>
+        <div>linkedin.com/in/julieth-rubio-052490b0</div>
+      </div>
+    </header>
+
+    <!-- ── Perfil ────────────────────────────────────────────────── -->
+    <section class="profile">
+      <div class="sec-label"><span class="num">01</span>Perfil<br/>profesional</div>
+      <div class="sec-body">
+        <p>Ingeniera Industrial, especialista en Gestión Integral de Riesgos y procesos, certificada Risk Manager ISO 31000 PECB, con más de 10 años de experiencia estructurando, implementando marcos de control operativo, continuidad del negocio y prevención de fraude, corrupción, LAFT, salvaguarda y la prevención de la explotación, abuso y acoso sexual (PSEA) y administración quejas sensibles y PQRS, sectores (salud pública, fiduciario-financiero, asegurador, consultoras de innovación y cooperación internacional ONG).</p>
+        <p>He liderado equipos y proyectos estratégicos presenciales y remotos, orientados al fortalecimiento del gobierno corporativo, la mitigación de riesgos financieros y operativos, y la consolidación de culturas organizacionales preventivas, como también he capacitado equipos corporativos y empresas para liderazgo y gestión.</p>
+        <p>Integro pensamiento sistémico y visión estratégica con capacidad de implementación y ejecución, articulando personas, procesos y tecnología. Cuento con experiencia en investigación casos éticos, gestión de stakeholders, reporting ejecutivo, gestión del cambio y automatización de procesos mediante herramientas digitales e inteligencia artificial, generando mejoras sostenidas en eficiencia, trazabilidad y control interno.</p>
+      </div>
+    </section>
+
+    <!-- ── Competencias ──────────────────────────────────────────── -->
+    <section>
+      <div class="sec-label"><span class="num">02</span>Competencias<br/>y herramientas</div>
+      <div class="sec-body">
+
+        <div class="skills-group">
+          <h3>Competencias profesionales</h3>
+          <dl class="skills">
+            <div class="skill-row">
+              <dt>Liderazgo &amp; personas</dt>
+              <dd>Arquitectura de liderazgo regulado · Medición del riesgo humano organizacional · Formación y desarrollo de equipos · Mapeo de patrones emocionales colectivos</dd>
+            </div>
+            <div class="skill-row">
+              <dt>Estrategia &amp; operación</dt>
+              <dd>Pensamiento sistémico y estratégico · Mejoramiento continuo · Gestión de stakeholders · Gestión de la experiencia del cliente · Capacidad analítica</dd>
+            </div>
+            <div class="skill-row">
+              <dt>Comunicación</dt>
+              <dd>Comunicación asertiva · Empatía organizacional · Manejo estructurado de quejas · Reporting ejecutivo</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="skills-group">
+          <h3>Herramientas y conocimientos técnicos</h3>
+          <dl class="skills">
+            <div class="skill-row">
+              <dt>Datos, reportes &amp; automatización</dt>
+              <dd>Power BI · KPIs · Tableros de control · Informes y reporting digitales · Inteligencia artificial aplicada para automatización de procesos con agentes IA · Cuantificación de riesgos · Simulación Montecarlo.</dd>
+            </div>
+            <div class="skill-row">
+              <dt>Riesgos &amp; compliance</dt>
+              <dd>ISO 31000 · Riesgos operativos SARO, SIAR, SAC, SAGRILAFT · Riesgos de corrupción y fraude · Riesgos éticos y de género · Due diligence · Riesgos de protección de datos personales · Riesgos tecnológicos · Riesgos financieros · Control interno · PQRS y gestión documental · Auditoría interna · Evaluación y monitoreo · Marco COSO · Apetito del riesgo.</dd>
+            </div>
+            <div class="skill-row">
+              <dt>Gestión de proyectos</dt>
+              <dd>Metodologías ágiles · Scrum · Notion · Monday · Asana · Planificación · Seguimiento operativo · OKRs.</dd>
+            </div>
+            <div class="skill-row">
+              <dt>Comunicación &amp; formación</dt>
+              <dd>Design thinking · Aprendizaje experiencial · Formación para personas · Coach PNL · Investigación de mercados · Regulación de equipos (neurociencia aplicada).</dd>
+            </div>
+          </dl>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Experiencia ───────────────────────────────────────────── -->
+    <section>
+      <div class="sec-label"><span class="num">03</span>Experiencia<br/>profesional</div>
+      <div class="sec-body">
+
+        <article class="job">
+          <div class="job-head">
+            <h3 class="job-title">Coordinadora de Gestión de Riesgos — Colombia</h3>
+            <span class="job-dates">2023 — 2024</span>
+          </div>
+          <p class="job-org">Acción Contra el Hambre · ONG Internacional</p>
+          <ul>
+            <li>Lideré equipos, la gestión presupuestal operativa transversal de riesgos (operativos, fraude, datos personales, due diligence, soborno, éticos y género) y proyectos en diferentes territorios, asegurando el cumplimiento de estándares, procesos y calidad de atención.</li>
+            <li>Rediseñé el procedimiento de investigación de quejas sensibles incorporando detección temprana de fraude; lideré la creación de un programa digital de formación preventiva, logrando un récord en identificación de situaciones críticas.</li>
+            <li>Lideré el sistema de protección de datos personales, quejas sensibles, due diligence, prevención del fraude y mecanismo de retroalimentación para Colombia y el proceso de implementación de SAGRILAFT, gestión de auditorías y cumplimiento.</li>
+            <li>Coordiné equipos multidisciplinarios para Colombia, fortaleciendo capacidades de servicio y relacionamiento con aliados y comunidades en múltiples territorios.</li>
+            <li>Integré metodologías ágiles en la operación del área, siendo reconocida como referente de liderazgo colaborativo y gestión orientada a resultados.</li>
+            <li>Coordiné auditorías internas de riesgos, brindé formación especializada a equipos de terreno y socios, y ejercí como punto focal de protección contra la explotación y el abuso sexual (PSEA) para Colombia.</li>
+          </ul>
+        </article>
+
+        <article class="job">
+          <div class="job-head">
+            <h3 class="job-title">Directora de Proyectos y Experiencia del Cliente</h3>
+            <span class="job-dates">2020 — 2023</span>
+          </div>
+          <p class="job-org">Widpal SAS · Consultoría y Tecnología Empresarial</p>
+          <ul>
+            <li>Lideré la operación y ejecución de proyectos comerciales, coordinando equipos de diseño, desarrollo y atención al cliente.</li>
+            <li>Implementé tableros de control e indicadores de desempeño (ventas, tiempos, satisfacción) para la toma de decisiones estratégicas con Power BI.</li>
+            <li>Reduje en un 30% los tiempos de entrega mediante optimización de procesos y trabajo colaborativo entre equipos operativos.</li>
+            <li>Diseñé procesos de onboarding, seguimiento y fidelización de clientes que mejoraron significativamente el NPS.</li>
+            <li>Creé modelos ágiles para la ejecución de actividades, mejorando la productividad y la experiencia del cliente.</li>
+          </ul>
+        </article>
+
+        <article class="job">
+          <div class="job-head">
+            <h3 class="job-title">Profesional Ejecutiva de Riesgos y Entes de Control</h3>
+            <span class="job-dates">2018 — 2020</span>
+          </div>
+          <p class="job-org">Fiduprevisora — USPEC · Unidad Servicios Penitenciarios y Carcelarios (Fondo Atención Salud PPL)</p>
+          <ul>
+            <li>Coordiné procesos operativos y equipos de atención a usuarios internos y externos, asegurando calidad, trazabilidad y continuidad de la operación.</li>
+            <li>Representé a la entidad en juntas directivas y mesas técnicas con USPEC, INPEC, Ministerio de Salud y entes de control, liderando el enfoque preventivo en gestión de riesgos públicos.</li>
+            <li>Estructuré el cálculo de reservas de riesgo con base en el apetito organizacional, fortaleciendo la capacidad financiera para minimizar procesos jurídicos y de defensa judicial.</li>
+            <li>Diseñé y ejecuté el plan de continuidad del negocio y contingencia para transiciones en remoto.</li>
+            <li>Desarrollé estrategias de capacitación que incrementaron la cultura organizacional de riesgos en líderes de área y personal operativo.</li>
+          </ul>
+        </article>
+
+        <article class="job">
+          <div class="job-head">
+            <h3 class="job-title">Profesional Senior — Sistema de Riesgo Operativo</h3>
+            <span class="job-dates">2016 — 2018</span>
+          </div>
+          <p class="job-org">Fiduprevisora — Consorcio SAYP (FOSYGA / Ministerio de Salud)</p>
+          <ul>
+            <li>Implementé y fortalecí procesos de control operativo y seguimiento en áreas clave (pagos, jurídica y administrativa), garantizando orden y trazabilidad.</li>
+            <li>Diseñé y ejecuté estrategias preventivas para la identificación y manejo de situaciones críticas, protegiendo la reputación institucional y la gestión de recursos.</li>
+            <li>Corregí alertas operativas oportunamente, evitando sanciones económicas y contractuales, y generé ahorros presupuestales mediante controles preventivos.</li>
+            <li>Consolidé una cultura de trabajo preventivo y ordenado, replicada como buena práctica interna de la organización.</li>
+          </ul>
+        </article>
+
+        <article class="job">
+          <div class="job-head">
+            <h3 class="job-title">Coordinadora de Proyectos — Innovación y Formación</h3>
+            <span class="job-dates">2015 — 2016</span>
+          </div>
+          <p class="job-org">Terra Mater (Insight Box) · Consultora en Formación e Innovación</p>
+          <ul>
+            <li>Lideré la planificación, ejecución y seguimiento de proyectos de innovación y desarrollo humano, articulando la dimensión estratégica y operativa.</li>
+            <li>Diseñé y facilité sesiones formativas en habilidades de liderazgo, comunicación, trabajo en equipo y pensamiento creativo para equipos directivos y organizaciones.</li>
+            <li>Apliqué design thinking, aprendizaje experiencial y herramientas visuales colaborativas para cocrear soluciones organizacionales ajustadas a cada cliente.</li>
+          </ul>
+        </article>
+
+        <article class="job">
+          <div class="job-head">
+            <h3 class="job-title">Analista / Asistente Técnica Nacional — Automóviles y SOAT</h3>
+            <span class="job-dates">2008 — 2015</span>
+          </div>
+          <p class="job-org">Seguros Bolívar · Aseguradora</p>
+          <ul>
+            <li>Lideré procesos clave de la operación técnica, normativa y comercial del ramo de automóviles y SOAT a nivel nacional.</li>
+            <li>Impulsé un crecimiento del 80% en pólizas digitales liderando capacitaciones nacionales en expedición web y reduciendo errores operativos en intermediarios y contact centers.</li>
+            <li>Garanticé el cumplimiento nacional en aplicación de tarifas y contribuciones, previniendo sanciones regulatorias ante entes de control.</li>
+            <li>Participé en mesas intersectoriales con Fasecolda, Ministerio de Salud, RUNT y Ministerio de Transporte para el desarrollo de la Malla Validadora MUI.</li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ── Logros ────────────────────────────────────────────────── -->
+    <section>
+      <div class="sec-label"><span class="num">04</span>Logros<br/>cuantificables<br/>destacados</div>
+      <div class="sec-body">
+        <ol class="achievements">
+          <li>Creación e implementación de modelo de gestión de riesgos para el sector ONG internacional ISO 31000, diseñando un marco adaptado a las particularidades operativas, éticas y de cumplimiento de organizaciones humanitarias en contextos de alta vulnerabilidad (nuevo modelo para el sector).</li>
+          <li>Récord organizacional en detección de fraude mediante rediseño de procedimientos y programa digital de formación preventiva — Acción Contra el Hambre.</li>
+          <li>Referente de modelo de riesgos para el Grupo de Transferencias Monetarias (GTM) del sector humanitario en Colombia.</li>
+          <li>Mejora de procesos y eficiencia en gestión de PQRS mediante rediseño del ciclo de atención de peticiones, quejas y reclamos, reduciendo tiempos de respuesta y fortaleciendo la trazabilidad — Acción Contra el Hambre.</li>
+          <li>Representación institucional ante Ministerios, INPEC, USPEC y entes de control, consolidando el enfoque preventivo en riesgos públicos y participación en mesas de trabajo de innovación.</li>
+          <li>Ahorros presupuestales por minimización de tutelas y efectos jurídicos en Fiduprevisora por identificaciones de causa raíz.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ── Educación ─────────────────────────────────────────────── -->
+    <section>
+      <div class="sec-label"><span class="num">05</span>Educación</div>
+      <div class="sec-body">
+        <div class="entry">
+          <div>
+            <h4>Ingeniería Industrial</h4>
+            <p class="meta">Universidad ECCI — Escuela Colombiana de Carreras Industriales</p>
+          </div>
+          <span class="when">2014</span>
+        </div>
+        <div class="entry">
+          <div>
+            <h4>Especialista en Gerencia de Seguridad y Salud en el Trabajo</h4>
+            <p class="meta">Universidad ECCI — Escuela Colombiana de Carreras Industriales</p>
+          </div>
+          <span class="when">2014 — 2015</span>
+        </div>
+        <div class="entry">
+          <div>
+            <h4>Ciencias del Comportamiento Organizacional</h4>
+            <p class="meta">Universidad de los Andes</p>
+          </div>
+          <span class="when">En proceso</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Certificaciones ───────────────────────────────────────── -->
+    <section>
+      <div class="sec-label"><span class="num">06</span>Certificaciones<br/>internacionales</div>
+      <div class="sec-body">
+        <div class="entry">
+          <div>
+            <h4>Risk Manager — ISO 31000</h4>
+            <p class="meta">PECB Canadá — Certificación Internacional</p>
+          </div>
+          <span class="when">2019</span>
+        </div>
+        <div class="entry">
+          <div>
+            <h4>Certified Trauma — Neurobiología relacional / Neurociencia aplicada</h4>
+            <p class="meta">International Association of Trauma Professionals (IATP) — EE. UU.</p>
+          </div>
+          <span class="when">—</span>
+        </div>
+        <div class="entry">
+          <div>
+            <h4>Coach en PNL — Programación Neurolingüística</h4>
+            <p class="meta">Certificación profesional</p>
+          </div>
+          <span class="when">—</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Formación complementaria ──────────────────────────────── -->
+    <section>
+      <div class="sec-label"><span class="num">07</span>Formación<br/>complementaria</div>
+      <div class="sec-body">
+        <ul class="pills">
+          <li>Riesgo Estratégico y TI — Nivel Ejecutivo</li>
+          <li>Anti-soborno, Corrupción y Abuso de Poder</li>
+          <li>Transformación Digital</li>
+          <li>LAB10 — Inteligencia Artificial aplicada</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── Idiomas ───────────────────────────────────────────────── -->
+    <section>
+      <div class="sec-label"><span class="num">08</span>Idiomas</div>
+      <div class="sec-body">
+        <ul class="langs">
+          <li>Español <span>Nativo</span></li>
+          <li>Inglés <span>Básico — Intermedio</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <p class="colophon">Referencias personales, laborales y datos privados disponibles a solicitud del interesado.</p>
+
+  </article>
+</body>
+</html>
