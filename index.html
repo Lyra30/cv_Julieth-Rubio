@@ -83,6 +83,16 @@
     letter-spacing: 0.01em;
   }
   .contact div{ white-space: nowrap; }
+  .contact a{
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .contact a:hover{
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
 
   /* ── Section frame ────────────────────────────────────────────── */
   section{
@@ -375,9 +385,9 @@
       </div>
       <div class="contact">
         <div>Bogotá, Colombia</div>
-        <div>+57 320 810 3735</div>
-        <div>juliethrubio68@gmail.com</div>
-        <div>linkedin.com/in/julieth-rubio-052490b0</div>
+        <div><a href="https://wa.me/573208103735" target="_blank" rel="noopener">+57 320 810 3735</a></div>
+        <div><a href="mailto:juliethrubio68@gmail.com">juliethrubio68@gmail.com</a></div>
+        <div><a href="https://linkedin.com/in/julieth-rubio-052490b0" target="_blank" rel="noopener">linkedin.com/in/julieth-rubio-052490b0</a></div>
       </div>
     </header>
 
