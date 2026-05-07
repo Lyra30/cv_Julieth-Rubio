@@ -47,10 +47,21 @@
   header.masthead{
     display: grid;
     grid-template-columns: 1fr auto;
-    align-items: end;
-    gap: 24px;
+    align-items: center;
+    gap: 36px;
     padding-bottom: 28px;
     border-bottom: 1px solid var(--rule);
+  }
+  .masthead-text{ display: flex; flex-direction: column; gap: 18px; }
+  .portrait{
+    width: 150px;
+    height: 180px;
+    object-fit: cover;
+    object-position: center 18%;
+    filter: grayscale(1) contrast(1.04);
+    border-radius: 2px;
+    background: var(--paper-2);
+    box-shadow: 0 1px 0 var(--rule);
   }
   .name{
     font-family: var(--serif);
@@ -81,6 +92,13 @@
     text-align: right;
     line-height: 1.8;
     letter-spacing: 0.01em;
+  }
+  .contact-inline{
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+    line-height: 1.7;
   }
   .contact div{ white-space: nowrap; }
   .contact a{
@@ -369,6 +387,7 @@
     .page{ padding: 40px 24px 56px; margin: 16px; }
     .name{ font-size: 44px; }
     header.masthead{ grid-template-columns: 1fr; }
+    .portrait{ width: 110px; height: 130px; order: -1; }
     .contact{ text-align: left; }
     section{ grid-template-columns: 1fr; gap: 14px; }
     .skill-row, .entry{ grid-template-columns: 1fr; gap: 4px; }
@@ -382,16 +401,19 @@
 
     <!-- ── Masthead ──────────────────────────────────────────────── -->
     <header class="masthead">
-      <div>
-        <h1 class="name">Julieth <em>Rubio</em></h1>
-        <p class="role">Ingeniera Industrial &nbsp;|&nbsp; Especialista en Gestión de Riesgos Estratégico y Cultura Organizacional</p>
+      <div class="masthead-text">
+        <div>
+          <h1 class="name">Julieth <em>Rubio</em></h1>
+          <p class="role">Ingeniera Industrial &nbsp;|&nbsp; Especialista en Gestión de Riesgos Estratégico y Cultura Organizacional</p>
+        </div>
+        <div class="contact contact-inline">
+          <div>Bogotá, Colombia</div>
+          <div><a href="https://wa.me/573208103735" target="_blank" rel="noopener">+57 320 810 3735</a></div>
+          <div><a href="mailto:juliethrubio68@gmail.com">juliethrubio68@gmail.com</a></div>
+          <div><a href="https://linkedin.com/in/julieth-rubio-052490b0" target="_blank" rel="noopener">linkedin.com/in/julieth-rubio-052490b0</a></div>
+        </div>
       </div>
-      <div class="contact">
-        <div>Bogotá, Colombia</div>
-        <div><a href="https://wa.me/573208103735" target="_blank" rel="noopener">+57 320 810 3735</a></div>
-        <div><a href="mailto:juliethrubio68@gmail.com">juliethrubio68@gmail.com</a></div>
-        <div><a href="https://linkedin.com/in/julieth-rubio-052490b0" target="_blank" rel="noopener">linkedin.com/in/julieth-rubio-052490b0</a></div>
-      </div>
+      <img class="portrait" src="assets/Foto_Juli.jpg" alt="Retrato de Julieth Rubio" />
     </header>
 
     <!-- ── Perfil ────────────────────────────────────────────────── -->
@@ -603,8 +625,8 @@
         </div>
         <div class="entry">
           <div>
-            <h4>Certified Trauma — Neurobiología relacional / Neurociencia aplicada</h4>
-            <p class="meta">International Association of Trauma Professionals (IATP) — EE. UU.</p>
+            <h4>Certified Trauma Somático — Neurobiología relacional / Neurociencia aplicada</h4>
+            <p class="meta">International Association of Trauma Professionals (IATP) — EE. UU. · NEUROSOMA</p>
           </div>
           <span class="when">—</span>
         </div>
