@@ -569,17 +569,36 @@
   }
 
   /* Print */
+  @page{
+    size: A4;
+    margin: 14mm 16mm;
+  }
   @media print{
-    body{ background: white; }
+    html, body{ background: white; }
+    body{ font-size: 12.5px; line-height: 1.42; }
     .page{
       box-shadow: none;
       margin: 0;
       max-width: none;
-      padding: 36px 48px;
+      padding: 0;
+      border-radius: 0;
     }
-    section{ break-inside: avoid; }
-    .job{ break-inside: avoid; }
     .print-btn{ display: none !important; }
+
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; color-adjust: exact; }
+
+    h1, h2, h3, h4{ break-after: avoid; }
+    section{ break-inside: avoid; page-break-inside: avoid; }
+    .job{ break-inside: avoid; page-break-inside: avoid; }
+    .entry{ break-inside: avoid; page-break-inside: avoid; }
+    .skill-row{ break-inside: avoid; page-break-inside: avoid; }
+    header.masthead{ break-inside: avoid; break-after: avoid; }
+    p, li{ orphans: 3; widows: 3; }
+
+    .name{ font-size: 34px; }
+    header.masthead{ padding-bottom: 18px; margin-bottom: 4px; }
+    section{ margin: 14px 0; }
+    .job + .job{ margin-top: 10px; }
   }
 
   .print-btn{
