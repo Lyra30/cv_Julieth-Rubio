@@ -214,6 +214,10 @@
     --ink-3: oklch(0.55 0.012 60);
     --rule: oklch(0.86 0.008 70);
     --accent: oklch(0.52 0.09 40);
+    --hue-1: oklch(0.42 0.07 38);
+    --hue-2: oklch(0.40 0.055 165);
+    --hue-3: oklch(0.38 0.05 258);
+    --hue-4: oklch(0.40 0.07 16);
     --serif: "Instrument Serif", "Times New Roman", serif;
     --sans: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
     --mono: "Geist Mono", ui-monospace, monospace;
@@ -312,33 +316,48 @@
 
   /* ── Section frame ────────────────────────────────────────────── */
   section{
-    display: grid;
-    grid-template-columns: 140px 1fr;
-    gap: 32px;
-    padding: 36px 0 32px;
+    display: block;
+    padding: 34px 0 32px;
     border-bottom: 1px solid var(--rule);
   }
   section:last-of-type{ border-bottom: none; }
 
   .sec-label{
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
     font-family: var(--mono);
-    font-size: 10.5px;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--ink-3);
-    padding-top: 4px;
+    letter-spacing: 0.12em;
+    color: var(--sec-hue, var(--ink-2));
+    margin-bottom: 20px;
   }
   .sec-label .num{
-    display: block;
-    color: var(--accent);
-    margin-bottom: 10px;
-    font-weight: 500;
+    color: var(--sec-hue, var(--accent));
+    font-weight: 600;
   }
+  section.sec-1{ --sec-hue: var(--hue-1); }
+  section.sec-2{ --sec-hue: var(--hue-2); }
+  section.sec-3{ --sec-hue: var(--hue-3); }
+  section.sec-4{ --sec-hue: var(--hue-4); }
+  section.sec-5{ --sec-hue: var(--hue-1); }
+  section.sec-6{ --sec-hue: var(--hue-2); }
+  section.sec-7{ --sec-hue: var(--hue-3); }
+  section.sec-8{ --sec-hue: var(--hue-4); }
 
   .sec-body > * + *{ margin-top: 14px; }
   .sec-body p{ margin: 0; max-width: 70ch; text-wrap: pretty; }
 
   /* Profile paragraphs */
+  .profile-panel{
+    position: relative;
+    background: linear-gradient(135deg, color-mix(in oklch, var(--hue-1) 8%, var(--paper)) 0%, color-mix(in oklch, var(--hue-2) 6%, var(--paper)) 100%);
+    border-radius: 16px;
+    padding: 32px 38px 30px;
+    box-shadow: 0 1px 2px oklch(0.4 0.02 60 / 0.06), 0 12px 28px -18px oklch(0.4 0.02 60 / 0.25);
+  }
+  .profile-panel p{ position: relative; z-index: 1; }
   .profile p{
     font-family: var(--serif);
     font-size: 15px;
@@ -351,10 +370,15 @@
     -webkit-hyphens: auto;
   }
   .profile p + p{ margin-top: 12px; }
+  .profile p .hl{
+    font-style: italic;
+    font-weight: 500;
+    color: var(--hue-1);
+  }
 
   /* ── Skills ───────────────────────────────────────────────────── */
   .skills-group{ }
-  .skills-group + .skills-group{ margin-top: 22px; }
+  .skills-group + .skills-group{ margin-top: 26px; }
   .skills-group h3{
     font-family: var(--sans);
     font-weight: 500;
@@ -362,29 +386,121 @@
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--ink);
-    margin: 0 0 10px;
+    margin: 0 0 14px;
   }
-  .skill-row{
+  .skills-grid{
     display: grid;
-    grid-template-columns: 170px 1fr;
-    gap: 20px;
-    padding: 8px 0;
-    border-top: 1px dotted var(--rule);
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
   }
-  .skill-row:first-of-type{ border-top: 1px solid var(--rule); }
-  .skill-row dt{
+  .skill-card{
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 16px 18px 17px;
+  }
+  .skill-card-head{
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 11px;
+  }
+  .skill-icon{
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    color: var(--accent);
+  }
+  .skill-icon svg{ width: 100%; height: 100%; display: block; }
+  .skill-card h4{
     font-family: var(--mono);
+    font-weight: 400;
     font-size: 10.5px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--ink-3);
-    padding-top: 2px;
-  }
-  .skill-row dd{
-    margin: 0;
-    font-size: 13.5px;
     color: var(--ink);
-    line-height: 1.55;
+    margin: 0;
+  }
+  .pill-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .pill{
+    font-family: var(--sans);
+    font-size: 11.5px;
+    line-height: 1.3;
+    color: var(--ink-2);
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 4px 11px;
+    white-space: nowrap;
+  }
+
+  /* ── Row layout ───────────────────────────────────────────────── */
+  .skills-mosaic{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .skills-mosaic .skill-card{
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    align-items: center;
+    gap: 22px;
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 15px 22px;
+    transition: border-color 0.15s ease;
+  }
+  .skills-mosaic .skill-card::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 12px;
+    bottom: 12px;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--card-hue, var(--accent));
+  }
+  .skill-badge{
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: var(--card-hue, var(--accent));
+  }
+  .skill-badge svg{ width: 15px; height: 15px; color: #fff; stroke: #fff; }
+  .hue-a{ --card-hue: oklch(0.42 0.07 38); }
+  .hue-b{ --card-hue: oklch(0.40 0.055 165); }
+  .hue-c{ --card-hue: oklch(0.38 0.05 258); }
+  .hue-d{ --card-hue: oklch(0.40 0.07 16); }
+  .skills-mosaic .skill-card-head{
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding-left: 10px;
+  }
+  .skills-mosaic .skill-card h4{
+    font-size: 10.5px;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .skills-mosaic .pill-list{
+    padding-top: 0;
+    border-left: 1px dotted var(--rule);
+    padding-left: 20px;
+  }
+  .skills-mosaic .pill{
+    background: color-mix(in oklch, var(--card-hue, var(--accent)) 5%, var(--paper));
+    border-color: var(--rule);
+    color: var(--ink-2);
   }
 
   /* ── Experience ───────────────────────────────────────────────── */
@@ -406,14 +522,18 @@
     font-size: 26px;
     line-height: 1.15;
     font-weight: 400;
-    color: var(--ink);
+    color: var(--job-hue, var(--sec-hue, var(--ink)));
     margin: 0;
     letter-spacing: -0.005em;
   }
+  .job.jh-1{ --job-hue: var(--hue-1); }
+  .job.jh-2{ --job-hue: var(--hue-2); }
+  .job.jh-3{ --job-hue: var(--hue-3); }
+  .job.jh-4{ --job-hue: var(--hue-4); }
   .job-dates{
     font-family: var(--mono);
     font-size: 11px;
-    color: var(--accent);
+    color: var(--sec-hue, var(--accent));
     letter-spacing: 0.04em;
     white-space: nowrap;
   }
@@ -450,31 +570,34 @@
 
   /* ── Achievements ─────────────────────────────────────────────── */
   .achievements{
-    counter-reset: achv;
     list-style: none;
     margin: 0;
     padding: 0;
   }
   .achievements li{
-    counter-increment: achv;
     display: grid;
-    grid-template-columns: 32px 1fr;
+    grid-template-columns: 34px 1fr;
     gap: 16px;
     padding: 14px 0;
     border-top: 1px dotted var(--rule);
     font-size: 13.5px;
     line-height: 1.55;
     max-width: 78ch;
+    align-items: start;
   }
   .achievements li:first-child{ border-top: 1px solid var(--rule); }
-  .achievements li::before{
-    content: "0" counter(achv);
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 0.04em;
-    padding-top: 3px;
+  .achv-icon{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--sec-hue, var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
   }
+  .achv-icon svg{ width: 15px; height: 15px; color: #fff; stroke: #fff; }
 
   /* ── Education / Certs ────────────────────────────────────────── */
   .entry{
@@ -493,7 +616,17 @@
     line-height: 1.2;
     margin: 0 0 4px;
     color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 9px;
   }
+  .entry-icon{
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    color: var(--sec-hue, var(--accent));
+  }
+  .entry-icon svg{ width: 100%; height: 100%; display: block; }
   .entry .meta{
     font-family: var(--sans);
     font-size: 12.5px;
@@ -503,7 +636,7 @@
   .entry .when{
     font-family: var(--mono);
     font-size: 11px;
-    color: var(--accent);
+    color: var(--sec-hue, var(--accent));
     letter-spacing: 0.04em;
     white-space: nowrap;
   }
@@ -518,15 +651,26 @@
     padding: 0;
   }
   .pills li{
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
     font-family: var(--mono);
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--ink-2);
+    color: var(--sec-hue, var(--ink-2));
     padding: 6px 12px;
-    border: 1px solid var(--rule);
+    border: 1px solid color-mix(in oklch, var(--sec-hue, var(--rule)) 35%, var(--rule));
     border-radius: 999px;
+    background: color-mix(in oklch, var(--sec-hue, var(--accent)) 6%, var(--paper));
   }
+  .pills-icon{
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+    color: var(--sec-hue, var(--accent));
+  }
+  .pills-icon svg{ width: 100%; height: 100%; display: block; }
 
   /* ── Languages ────────────────────────────────────────────────── */
   .langs{
@@ -548,7 +692,19 @@
     align-items: baseline;
     gap: 12px;
   }
-  .langs li span{
+  .lang-name{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .lang-icon{
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    color: var(--sec-hue, var(--accent));
+  }
+  .lang-icon svg{ width: 100%; height: 100%; display: block; }
+  .lang-level{
     font-family: var(--mono);
     font-size: 11px;
     color: var(--ink-3);
@@ -590,7 +746,8 @@
     h1, h2, h3, h4{ break-after: avoid; }
     .job{ break-inside: avoid; page-break-inside: avoid; }
     .entry{ break-inside: avoid; page-break-inside: avoid; }
-    .skill-row{ break-inside: avoid; page-break-inside: avoid; }
+    .skill-card{ break-inside: avoid; page-break-inside: avoid; }
+    .profile-panel{ break-inside: avoid; page-break-inside: avoid; }
     header.masthead{ break-inside: avoid; break-after: avoid; }
     p, li{ orphans: 3; widows: 3; }
 
@@ -632,15 +789,31 @@
   }
 
   @media (max-width: 760px){
-    .page{ padding: 40px 24px 56px; margin: 16px; }
-    .name{ font-size: 44px; }
-    header.masthead{ grid-template-columns: 1fr; }
-    .portrait{ width: 110px; height: 130px; order: -1; }
+    .page{ padding: 32px 18px 44px; margin: 10px; }
+    .name{ font-size: 38px; }
+    header.masthead{ grid-template-columns: 1fr; gap: 20px; }
+    .portrait{ width: 96px; height: 114px; order: -1; }
     .contact{ text-align: left; }
-    section{ grid-template-columns: 1fr; gap: 14px; }
-    .skill-row, .entry{ grid-template-columns: 1fr; gap: 4px; }
-    .job-head{ grid-template-columns: 1fr; }
+    .contact-inline{ gap: 4px 12px; }
+    section{ grid-template-columns: 1fr; gap: 14px; padding: 26px 0 24px; }
+    .sec-label{ font-size: 10px; margin-bottom: 16px; }
+    .entry{ grid-template-columns: 1fr; gap: 4px; }
+    .entry .when{ margin-top: 2px; }
+    .skills-grid{ grid-template-columns: 1fr; }
+    .skills-mosaic .skill-card{ grid-template-columns: 1fr; gap: 10px; padding: 16px 16px 16px 20px; }
+    .skills-mosaic .skill-card-head{ padding-left: 0; }
+    .skills-mosaic .pill-list{ border-left: none; padding-left: 0; }
+    .job-head{ grid-template-columns: 1fr; gap: 4px; }
+    .job-title{ font-size: 21px; }
+    .job ul li{ padding-left: 16px; font-size: 13px; }
     .langs{ grid-template-columns: 1fr; }
+    .profile-panel{ padding: 22px 20px 20px; border-radius: 12px; }
+    .profile p{ text-align: left; }
+    .achievements li{ grid-template-columns: 26px 1fr; gap: 12px; padding: 12px 0; }
+    .achv-icon{ width: 26px; height: 26px; }
+    .achv-icon svg{ width: 13px; height: 13px; }
+    .pill{ font-size: 11px; padding: 4px 9px; }
+    .skill-card{ padding: 14px 15px 15px; }
   }
 </style>
 </head>
@@ -669,69 +842,87 @@
     </header>
 
     <!-- ── Perfil ────────────────────────────────────────────────── -->
-    <section class="profile">
-      <div class="sec-label"><span class="num">01</span>Perfil<br>profesional</div>
+    <section class="profile sec-1">
+      <div class="sec-label"><span class="num">01</span>Perfil profesional</div>
       <div class="sec-body">
-        <p>Ingeniera Industrial con trayectoria en gestión integral de riesgos, procesos, gestión de proyectos, control interno, continuidad del negocio y cultura organizacional, certificada como Risk Manager ISO 31000 PECB de Canadá, con más de 10 años de experiencia en el diseño e implementación de marcos de control operativo, prevención de fraude, corrupción, LAFT, salvaguarda y prevención de la explotación, abuso y acoso sexual (PSEA), así como riesgos éticos en la gestión e investigación de quejas sensibles y administración de PQRS en diferentes sectores como salud pública, fiduciario-financiero, asegurador, consultoría de innovación y cooperación internacional (ONG).</p>
-        <p>He liderado equipos y proyectos estratégicos, tanto presenciales como remotos, enfocados en el fortalecimiento del gobierno corporativo, la mitigación de riesgos financieros y operativos, y la consolidación de culturas organizacionales preventivas. Asimismo, cuento con experiencia en formación y capacitación de equipos corporativos en liderazgo, cultura preventiva y gestión de riesgos.</p>
-        <p>Integro pensamiento sistémico y visión estratégica con una alta capacidad de implementación y ejecución, articulando personas, procesos y tecnología, due diligence, reporting ejecutivo, gestión del cambio y automatización de procesos mediante herramientas digitales e inteligencia artificial, impulsando mejoras sostenidas en eficiencia, trazabilidad.</p>
+        <div class="profile-panel">
+        <p><span class="hl">Ingeniera Industrial</span> con trayectoria en <span class="hl">gestión integral de riesgos</span>, procesos, gestión de proyectos, control interno, continuidad del negocio y cultura organizacional, certificada como <span class="hl">Risk Manager ISO 31000 PECB</span> de Canadá, con más de 10 años de experiencia en el diseño e implementación de marcos de control operativo, <span class="hl">prevención de fraude, corrupción, LAFT</span>, salvaguarda y prevención de la explotación, abuso y acoso sexual (PSEA), así como riesgos éticos en la gestión e investigación de quejas sensibles y administración de PQRS en diferentes sectores como salud pública, fiduciario-financiero, asegurador, consultoría de innovación y cooperación internacional (ONG).</p>
+        <p>He <span class="hl">liderado equipos y proyectos estratégicos</span>, tanto presenciales como remotos, enfocados en el fortalecimiento del gobierno corporativo, la mitigación de riesgos financieros y operativos, y la consolidación de culturas organizacionales preventivas. Asimismo, cuento con experiencia en <span class="hl">formación y capacitación</span> de equipos corporativos en liderazgo, cultura preventiva y gestión de riesgos.</p>
+        <p>Integro <span class="hl">pensamiento sistémico y visión estratégica</span> con una alta capacidad de implementación y ejecución, articulando personas, procesos y tecnología, due diligence, reporting ejecutivo, gestión del cambio y automatización de procesos mediante herramientas digitales e <span class="hl">inteligencia artificial</span>, impulsando mejoras sostenidas en eficiencia, trazabilidad.</p>
+        </div>
       </div>
     </section>
 
     <!-- ── Competencias ──────────────────────────────────────────── -->
-    <section>
-      <div class="sec-label"><span class="num">02</span>Competencias<br>y herramientas</div>
+    <section class="sec-2">
+      <div class="sec-label"><span class="num">02</span>Competencias y herramientas</div>
       <div class="sec-body">
 
         <div class="skills-group">
-          <h3>Competencias profesionales</h3>
-          <dl class="skills">
-            <div class="skill-row">
-              <dt>Liderazgo &amp; personas</dt>
-              <dd>Arquitectura de liderazgo regulado · Medición del riesgo humano organizacional · Formación y desarrollo de equipos · Mapeo de patrones emocionales colectivos</dd>
-            </div>
-            <div class="skill-row">
-              <dt>Estrategia &amp; operación</dt>
-              <dd>Pensamiento sistémico y estratégico · Mejoramiento continuo · Gestión de stakeholders · Gestión de la experiencia del cliente · Capacidad analítica</dd>
-            </div>
-            <div class="skill-row">
-              <dt>Comunicación</dt>
-              <dd>Comunicación asertiva · Empatía organizacional · Manejo estructurado de quejas · Reporting ejecutivo</dd>
-            </div>
-          </dl>
-        </div>
-
         <div class="skills-group">
-          <h3>Herramientas y conocimientos técnicos</h3>
-          <dl class="skills">
-            <div class="skill-row">
-              <dt>Datos, reportes &amp; automatización</dt>
-              <dd>Power BI · KPIs · Tableros de control · Informes y reporting digitales · Inteligencia artificial aplicada para automatización de procesos con agentes IA · Cuantificación de riesgos · Simulación Montecarlo.</dd>
+          <div class="skills-mosaic">
+          <div class="skill-card hue-a">
+            <div class="skill-card-head">
+              <span class="skill-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M11 20V4M18 20v-7"/><path d="M2 20h20"/></svg></span>
+              <h4>Datos, reportes &amp; automatización</h4>
             </div>
-            <div class="skill-row">
-              <dt>Riesgos &amp; compliance</dt>
-              <dd>ISO 31000 · Riesgos operativos SARO, SIAR, SAC, SAGRILAFT · Riesgos de corrupción y fraude · Riesgos éticos y de género · Due diligence · Riesgos de protección de datos personales · Riesgos tecnológicos · Riesgos financieros · Control interno · PQRS y gestión documental · Auditoría interna · Evaluación y monitoreo · Marco COSO · Apetito del riesgo.</dd>
+            <div class="pill-list">
+                  <span class="pill">Power BI y tableros de control</span>
+                  <span class="pill">KPIs y reporting ejecutivo</span>
+                  <span class="pill">Automatización de procesos con IA</span>
+                  <span class="pill">Cuantificación de riesgos</span>
+                  <span class="pill">Simulación Montecarlo</span>
             </div>
-            <div class="skill-row">
-              <dt>Gestión de proyectos</dt>
-              <dd>Metodologías ágiles · Scrum · Notion · Monday · Asana · Planificación · Seguimiento operativo · OKRs.</dd>
+          </div>
+          <div class="skill-card hue-c">
+            <div class="skill-card-head">
+              <span class="skill-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.8-7 9-4-1.2-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
+              <h4>Riesgos &amp; compliance</h4>
             </div>
-            <div class="skill-row">
-              <dt>Comunicación &amp; formación</dt>
-              <dd>Design thinking · Aprendizaje experiencial · Formación para personas · Coach PNL · Investigación de mercados · Regulación de equipos (neurociencia aplicada).</dd>
+            <div class="pill-list">
+                  <span class="pill">ISO 31000</span>
+                  <span class="pill">Riesgos operativos (SARO, SIAR, SAC, SAGRILAFT)</span>
+                  <span class="pill">Fraude, corrupción y LAFT</span>
+                  <span class="pill">Riesgos éticos, género y protección de datos</span>
+                  <span class="pill">Auditoría y control interno (COSO)</span>
+                  <span class="pill">Due diligence y apetito del riesgo</span>
             </div>
-          </dl>
+          </div>
+          <div class="skill-card hue-b">
+            <div class="skill-card-head">
+              <span class="skill-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="5" height="16" rx="1"/><rect x="9.5" y="4" width="5" height="10" rx="1"/><rect x="16" y="4" width="5" height="13" rx="1"/></svg></span>
+              <h4>Gestión de proyectos</h4>
+            </div>
+            <div class="pill-list">
+                  <span class="pill">Metodologías ágiles y Scrum</span>
+                  <span class="pill">Notion, Monday, Asana</span>
+                  <span class="pill">Planificación y seguimiento operativo</span>
+                  <span class="pill">OKRs</span>
+            </div>
+          </div>
+          <div class="skill-card hue-d">
+            <div class="skill-card-head">
+              <span class="skill-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-4 10 4-10 4-10-4z"/><path d="M6 11v5c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-5"/><path d="M22 9v6"/></svg></span>
+              <h4>Comunicación &amp; formación</h4>
+            </div>
+            <div class="pill-list">
+                  <span class="pill">Design thinking</span>
+                  <span class="pill">Capacitaciones organizacionales riesgos</span>
+                  <span class="pill">Certificada como Coach PNL</span>
+                  <span class="pill">Certificada Neurobiología relacional (neurociencia aplicada)</span>
+            </div>
+          </div>
+          </div>
         </div>
 
       </div>
     </section>
-
     <!-- ── Experiencia ───────────────────────────────────────────── -->
-    <section>
-      <div class="sec-label"><span class="num">03</span>Experiencia<br>profesional</div>
+    <section class="sec-3">
+      <div class="sec-label"><span class="num">03</span>Experiencia profesional</div>
       <div class="sec-body">
 
-        <article class="job">
+        <article class="job jh-1">
           <div class="job-head">
             <h3 class="job-title">Consultoría Organizacional | Gestión de riesgos, Formación</h3>
             <span class="job-dates">2025 — enero 2026</span>
@@ -739,27 +930,26 @@
           <p class="job-org">Consultoría Independiente</p>
           <ul>
             <li>Desarrollo consultorías técnicas en gestión de riesgos operativos, fraude y éticos (análisis de quejas, casos sensibles), apoyo y facilitación de formación, automatización de procesos con herramientas de inteligencia artificial.</li>
-            <li>Acompañamiento y apoyo en gestión de proyectos empresariales de gestión de riesgos en diferentes organizaciones a Carlos Alfonso Restrepo Oramas, Gerente de Riesgos y Conferencista Internacional.</li>
+            <li>Acompañamiento y apoyo en gestión de proyectos empresariales de gestión de riesgos en diferentes organizaciones con Carlos Alfonso Restrepo Oramas, Gerente de Riesgos y Conferencista Internacional.</li>
           </ul>
         </article>
 
-        <article class="job">
+        <article class="job jh-2">
           <div class="job-head">
             <h3 class="job-title">Coordinadora de Gestión de Riesgos — Colombia</h3>
             <span class="job-dates">2023 — 2024</span>
           </div>
           <p class="job-org">Acción Contra el Hambre · Cooperación Internacional (ONG), Casa matriz España</p>
           <ul>
-            <li>Lideré equipos, la gestión presupuestal operativa transversal de riesgos (operativos, fraude, datos personales, due diligence, soborno, éticos y género) y proyectos en diferentes territorios, asegurando el cumplimiento de estándares, procesos y calidad de atención.</li>
-            <li>Rediseñé el procedimiento de investigación de quejas sensibles incorporando detección temprana de fraude; lideré la creación de un programa digital de formación preventiva, logrando un récord en identificación de situaciones críticas.</li>
-            <li>Lideré el sistema de protección de datos personales, quejas sensibles, due diligence, prevención del fraude y mecanismo de retroalimentación para Colombia y el proceso de implementación de SAGRILAFT, gestión de auditorías y cumplimiento.</li>
-            <li>Coordiné equipos multidisciplinarios para Colombia, fortaleciendo capacidades de servicio y relacionamiento con aliados y comunidades en múltiples territorios.</li>
-            <li>Integré metodologías ágiles en la operación del área, siendo reconocida como referente de liderazgo colaborativo y gestión orientada a resultados.</li>
-            <li>Coordiné auditorías internas de riesgos, brindé formación especializada a equipos de terreno y socios, y ejercí como punto focal de protección contra la explotación y el abuso sexual (PSEA) para Colombia.</li>
+            <li>Liderazgo de equipo, para la gestión operativa y presupuestal transversal de riesgos (operativos, fraude, datos personales, due diligence, soborno, éticos y género) y de gestión de proyectos en diferentes territorios, asegurando el cumplimiento de estándares, procesos y calidad de atención.</li>
+            <li>Liderazgo de los procesos de investigación de quejas sensibles, mitigación de riesgos de fraude, creación y formación de programas educativos para las comunidades.</li>
+            <li>Liderazgo del sistema de protección de datos personales, quejas sensibles, due diligence, prevención del fraude y mecanismo de retroalimentación para Colombia y el proceso de implementación de SAGRILAFT, gestión de auditorías y cumplimiento.</li>
+            <li>Formaciones a la organización, socios y comunidades en la cultura organizacional y gestión de riesgos.</li>
+            <li>Coordinación de auditorías internas de riesgos, formación especializada a equipos de terreno y socios, y gestión de información como punto focal de protección contra la explotación y el abuso sexual (PSEA) para Colombia.</li>
           </ul>
         </article>
 
-        <article class="job">
+        <article class="job jh-3">
           <div class="job-head">
             <h3 class="job-title">Directora de Proyectos y Experiencia del Cliente</h3>
             <span class="job-dates">2020 — 2023</span>
@@ -775,7 +965,7 @@
           </ul>
         </article>
 
-        <article class="job">
+        <article class="job jh-4">
           <div class="job-head">
             <h3 class="job-title">Profesional Senior de Riesgos y Entes de Control</h3>
             <span class="job-dates">2018 — 2020</span>
@@ -790,7 +980,7 @@
           </ul>
         </article>
 
-        <article class="job">
+        <article class="job jh-1">
           <div class="job-head">
             <h3 class="job-title">Profesional Senior — Sistema de Riesgo Operativo</h3>
             <span class="job-dates">2016 — 2018</span>
@@ -804,7 +994,7 @@
           </ul>
         </article>
 
-        <article class="job">
+        <article class="job jh-2">
           <div class="job-head">
             <h3 class="job-title">Coordinadora de Proyectos — Innovación y Formación</h3>
             <span class="job-dates">2015 — 2016</span>
@@ -817,7 +1007,7 @@
           </ul>
         </article>
 
-        <article class="job">
+        <article class="job jh-3">
           <div class="job-head">
             <h3 class="job-title">Analista / Asistente Técnica Nacional — Automóviles y SOAT</h3>
             <span class="job-dates">2008 — 2015</span>
@@ -835,41 +1025,41 @@
     </section>
 
     <!-- ── Logros ────────────────────────────────────────────────── -->
-    <section>
-      <div class="sec-label"><span class="num">04</span>Logros<br>cuantificables<br>destacados</div>
+    <section class="sec-4">
+      <div class="sec-label"><span class="num">04</span>Logros cuantificables destacados</div>
       <div class="sec-body">
         <ol class="achievements">
-          <li>Creación e implementación de modelo de gestión de riesgos para el sector ONG internacional ISO 31000, diseñando un marco adaptado a las particularidades operativas, éticas y de cumplimiento de organizaciones humanitarias en contextos de alta vulnerabilidad (nuevo modelo para el sector).</li>
-          <li>Récord organizacional en detección de fraude mediante rediseño de procedimientos y programa digital de formación preventiva — Acción Contra el Hambre.</li>
-          <li>Referente de modelo de riesgos para el Grupo de Transferencias Monetarias (GTM) del sector humanitario en Colombia.</li>
-          <li>Mejora de procesos y eficiencia en gestión de PQRS mediante rediseño del ciclo de atención de peticiones, quejas y reclamos, reduciendo tiempos de respuesta y fortaleciendo la trazabilidad — Acción Contra el Hambre.</li>
-          <li>Representación institucional ante Ministerios, INPEC, USPEC y entes de control, consolidando el enfoque preventivo en riesgos públicos y participación en mesas de trabajo de innovación.</li>
-          <li>Ahorros presupuestales por minimización de tutelas y efectos jurídicos en Fiduprevisora por identificaciones de causa raíz.</li>
+          <li><span class="achv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M7 5H4a1 1 0 0 0-1 1v1a4 4 0 0 0 4 4"/><path d="M17 5h3a1 1 0 0 1 1 1v1a4 4 0 0 1-4 4"/><path d="M12 13v5"/><path d="M9 21h6"/></svg></span>Creación e implementación de modelo de gestión de riesgos para el sector ONG internacional ISO 31000, diseñando un marco adaptado a las particularidades operativas, éticas y de cumplimiento de organizaciones humanitarias en contextos de alta vulnerabilidad (nuevo modelo para el sector).</li>
+          <li><span class="achv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M7 5H4a1 1 0 0 0-1 1v1a4 4 0 0 0 4 4"/><path d="M17 5h3a1 1 0 0 1 1 1v1a4 4 0 0 1-4 4"/><path d="M12 13v5"/><path d="M9 21h6"/></svg></span>Récord organizacional en detección de fraude mediante rediseño de procedimientos y programa digital de formación preventiva — Acción Contra el Hambre.</li>
+          <li><span class="achv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M7 5H4a1 1 0 0 0-1 1v1a4 4 0 0 0 4 4"/><path d="M17 5h3a1 1 0 0 1 1 1v1a4 4 0 0 1-4 4"/><path d="M12 13v5"/><path d="M9 21h6"/></svg></span>Referente de modelo de riesgos para el Grupo de Transferencias Monetarias (GTM) del sector humanitario en Colombia.</li>
+          <li><span class="achv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M7 5H4a1 1 0 0 0-1 1v1a4 4 0 0 0 4 4"/><path d="M17 5h3a1 1 0 0 1 1 1v1a4 4 0 0 1-4 4"/><path d="M12 13v5"/><path d="M9 21h6"/></svg></span>Mejora de procesos y eficiencia en gestión de PQRS mediante rediseño del ciclo de atención de peticiones, quejas y reclamos, reduciendo tiempos de respuesta y fortaleciendo la trazabilidad — Acción Contra el Hambre.</li>
+          <li><span class="achv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M7 5H4a1 1 0 0 0-1 1v1a4 4 0 0 0 4 4"/><path d="M17 5h3a1 1 0 0 1 1 1v1a4 4 0 0 1-4 4"/><path d="M12 13v5"/><path d="M9 21h6"/></svg></span>Representación institucional ante Ministerios, INPEC, USPEC y entes de control, consolidando el enfoque preventivo en riesgos públicos y participación en mesas de trabajo de innovación.</li>
+          <li><span class="achv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M7 5H4a1 1 0 0 0-1 1v1a4 4 0 0 0 4 4"/><path d="M17 5h3a1 1 0 0 1 1 1v1a4 4 0 0 1-4 4"/><path d="M12 13v5"/><path d="M9 21h6"/></svg></span>Ahorros presupuestales por minimización de tutelas y efectos jurídicos en Fiduprevisora por identificaciones de causa raíz.</li>
         </ol>
       </div>
     </section>
 
     <!-- ── Educación ─────────────────────────────────────────────── -->
-    <section>
+    <section class="sec-5">
       <div class="sec-label"><span class="num">05</span>Educación</div>
       <div class="sec-body">
         <div class="entry">
           <div>
-            <h4>Ingeniería Industrial</h4>
+            <h4><span class="entry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-4 10 4-10 4-10-4z"/><path d="M6 11v5c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-5"/><path d="M22 9v6"/></svg></span>Ingeniería Industrial</h4>
             <p class="meta">Universidad ECCI — Escuela Colombiana de Carreras Industriales</p>
           </div>
           <span class="when">2014</span>
         </div>
         <div class="entry">
           <div>
-            <h4>Especialista en Gerencia de Seguridad y Salud en el Trabajo</h4>
+            <h4><span class="entry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-4 10 4-10 4-10-4z"/><path d="M6 11v5c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-5"/><path d="M22 9v6"/></svg></span>Especialista en Gerencia de Seguridad y Salud en el Trabajo</h4>
             <p class="meta">Universidad ECCI — Escuela Colombiana de Carreras Industriales</p>
           </div>
           <span class="when">2014 — 2015</span>
         </div>
         <div class="entry">
           <div>
-            <h4>Ciencias del Comportamiento Organizacional</h4>
+            <h4><span class="entry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-4 10 4-10 4-10-4z"/><path d="M6 11v5c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-5"/><path d="M22 9v6"/></svg></span>Ciencias del Comportamiento Organizacional</h4>
             <p class="meta">Universidad de los Andes</p>
           </div>
           <span class="when">En proceso</span>
@@ -878,26 +1068,26 @@
     </section>
 
     <!-- ── Certificaciones ───────────────────────────────────────── -->
-    <section>
-      <div class="sec-label"><span class="num">06</span>Certificaciones<br>internacionales</div>
+    <section class="sec-6">
+      <div class="sec-label"><span class="num">06</span>Certificaciones internacionales</div>
       <div class="sec-body">
         <div class="entry">
           <div>
-            <h4>Risk Manager — ISO 31000</h4>
+            <h4><span class="entry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8.5 12.5L7 21l5-3 5 3-1.5-8.5"/></svg></span>Risk Manager — ISO 31000</h4>
             <p class="meta">PECB Canadá — Certificación Internacional</p>
           </div>
           <span class="when">2019</span>
         </div>
         <div class="entry">
           <div>
-            <h4>Certified Trauma Somático — Neurobiología relacional / Neurociencia aplicada</h4>
+            <h4><span class="entry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8.5 12.5L7 21l5-3 5 3-1.5-8.5"/></svg></span>Certified Trauma Somático — Neurobiología relacional / Neurociencia aplicada</h4>
             <p class="meta">International Association of Trauma Professionals (IATP) — EE. UU. · NEUROSOMA - Marco Ratti</p>
           </div>
           <span class="when">—</span>
         </div>
         <div class="entry">
           <div>
-            <h4>Coach en PNL — Programación Neurolingüística</h4>
+            <h4><span class="entry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8.5 12.5L7 21l5-3 5 3-1.5-8.5"/></svg></span>Coach en PNL — Programación Neurolingüística</h4>
             <p class="meta">Certificación profesional</p>
           </div>
           <span class="when">—</span>
@@ -906,25 +1096,25 @@
     </section>
 
     <!-- ── Formación complementaria ──────────────────────────────── -->
-    <section>
-      <div class="sec-label"><span class="num">07</span>Formación<br>complementaria</div>
+    <section class="sec-7">
+      <div class="sec-label"><span class="num">07</span>Formación complementaria</div>
       <div class="sec-body">
         <ul class="pills">
-          <li>Riesgo Estratégico y TI — Nivel Ejecutivo</li>
-          <li>Anti-soborno, Corrupción y Abuso de Poder</li>
-          <li>Transformación Digital</li>
-          <li>LAB10 — Inteligencia Artificial aplicada</li>
+          <li><span class="pills-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5V4.5z"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg></span>Riesgo Estratégico y TI — Nivel Ejecutivo</li>
+          <li><span class="pills-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5V4.5z"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg></span>Anti-soborno, Corrupción y Abuso de Poder</li>
+          <li><span class="pills-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5V4.5z"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg></span>Transformación Digital</li>
+          <li><span class="pills-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5V4.5z"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg></span>LAB10 — Inteligencia Artificial aplicada</li>
         </ul>
       </div>
     </section>
 
     <!-- ── Idiomas ───────────────────────────────────────────────── -->
-    <section>
+    <section class="sec-8">
       <div class="sec-label"><span class="num">08</span>Idiomas</div>
       <div class="sec-body">
         <ul class="langs">
-          <li>Español <span>Nativo</span></li>
-          <li>Inglés <span>Básico — Intermedio</span></li>
+          <li><span class="lang-name"><span class="lang-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.7 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.7-3.8-9S9.5 5.5 12 3z"/></svg></span>Español</span> <span class="lang-level">Nativo</span></li>
+          <li><span class="lang-name"><span class="lang-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.7 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.7-3.8-9S9.5 5.5 12 3z"/></svg></span>Inglés</span> <span class="lang-level">Básico — Intermedio</span></li>
         </ul>
       </div>
     </section>
