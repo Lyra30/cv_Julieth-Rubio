@@ -560,11 +560,13 @@
   .job ul li::before{
     content: "";
     position: absolute;
-    left: 0;
-    top: 16px;
-    width: 10px;
-    height: 1px;
-    background: var(--ink-3);
+    left: 1px;
+    top: 15px;
+    width: 5px;
+    height: 5px;
+    background: color-mix(in oklch, var(--sec-hue, var(--accent)) 45%, var(--rule));
+    transform: rotate(45deg);
+    border-radius: 1px;
   }
   .job ul li + li{ border-top: 1px dotted var(--rule); }
 
